@@ -1,0 +1,40 @@
+#集群名称
+cluster.name: my-application
+#节点名称
+node.name: node-1
+#数据和日志的存储目录
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+#设置绑定的ip，设置为0.0.0.0以后就可以让任何计算机节点访问到了
+network.host: 0.0.0.0
+#端口
+http.port: 9200
+#设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的，目前是单机，放入一个节点即可
+discovery.seed_hosts: ["192.168.0.100"]
+cluster.initial_master_nodes: ["192.168.0.100:9300", "127.0.0.1:9300"]
+cluster.routing.allocation.same_shard.host: true
+node.max_local_storage_nodes: 2
+# discovery.zen.ping.unicast.hosts: ["192.168.0.100"]
+# discovery.zen.minimum_master_nodes: 1
+# discovery.zen.ping.multicast.enabled: false
+# discovery.zen.ping.multicast.group: 224.2.2.4
+# discovery.zen.ping.multicast.port : 54328
+# discovery.zen.ping.multicast.ttl: 3
+# discovery.zen.ping.multicast.address: 0.0.0.0
+# node.master: true
+# node.data: true
+# index.number_of_shards: 5
+# index.number_of_replicas: 2
+#indices.fielddata.cache.size: 50%
+#
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
+http.cors.allow-headers : Authorization, X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+
+
+transport.tcp.port: 9300
+# 设置节点之间交互的tcp端口，默认是9300。
+transport.tcp.compress: true
+# 设置是否压缩tcp传输时的数据，默认为false，不压缩。
+
