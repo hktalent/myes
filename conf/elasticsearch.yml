@@ -11,7 +11,7 @@ network.host: 0.0.0.0
 http.port: 9200
 #设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的，目前是单机，放入一个节点即可
 discovery.seed_hosts: ["127.0.0.1:9300", "192.168.0.100:9300"]
-cluster.initial_master_nodes: ["node-1"]
+cluster.initial_master_nodes: ["node-1", "node-2"]
 cluster.routing.allocation.same_shard.host: true
 node.max_local_storage_nodes: 2
 # discovery.zen.ping.unicast.hosts: ["192.168.0.100"]
@@ -38,3 +38,4 @@ transport.tcp.port: 9300
 transport.tcp.compress: true
 # 设置是否压缩tcp传输时的数据，默认为false，不压缩。
 
+reindex.remote.whitelist: "192.168.0.100:9300"
