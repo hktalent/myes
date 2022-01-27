@@ -9,6 +9,14 @@ docker run -p 9200:9200 -p 9300:9300 -d --name es -e ES_JAVA_OPTS="-Xms512m -Xmx
 # How export/import data
 https://github.com/elasticsearch-dump/elasticsearch-dump
 ```bash
+
+rm -rf plugins/*
+./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.16.2/elasticsearch-analysis-ik-7.16.2.zip
+./bin/elasticsearch-plugin install analysis-icu
+./bin/elasticsearch-plugin install discovery-azure-classic
+./bin/elasticsearch-plugin install ingest-attachment
+./bin/elasticsearch-plugin install discovery-ec2
+
 npm install elasticdump -g
 elasticdump --input=http://127.0.0.1:9200/cve_index --output=http://192.168.0.100:9200/cve_index --concurrency=8 --limit=20000 --type=data
 # Backup
