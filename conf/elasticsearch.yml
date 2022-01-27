@@ -1,7 +1,7 @@
 #集群名称
 cluster.name: my-application
 #节点名称
-node.name: node-3
+node.name: node-1
 #数据和日志的存储目录
 path.data: /usr/share/elasticsearch/data
 path.logs: /usr/share/elasticsearch/logs
@@ -11,7 +11,7 @@ network.host: 0.0.0.0
 http.port: 9200
 #设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的，目前是单机，放入一个节点即可
 discovery.seed_hosts: ["127.0.0.1:9300", "192.168.0.100:9300", "192.168.0.107:9300"]
-cluster.initial_master_nodes: ["node-3"]
+cluster.initial_master_nodes: ["node-1"]
 cluster.routing.allocation.same_shard.host: true
 
 # cluster.routing.allocation.node_initial_primaries_recoveries: 8
