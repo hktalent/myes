@@ -13,6 +13,51 @@ http.port: 9200
 discovery.seed_hosts: ["127.0.0.1:9300", "192.168.0.100:9300"]
 cluster.initial_master_nodes: ["node-1", "node-2"]
 cluster.routing.allocation.same_shard.host: true
+
+# cluster.routing.allocation.node_initial_primaries_recoveries: 8
+# cluster.routing.allocation.node_concurrent_recoveries: 2
+# discovery.zen.fd.ping_interval: 10s
+# discovery.zen.fd.ping_timeout: 120s
+# discovery.zen.fd.ping_retries: 6
+
+# thread_pool.get.size: 16
+# # must be <= 5
+# thread_pool.write.size: 4
+# thread_pool.search.size: 8
+# thread_pool.get.queue_size: 8
+# thread_pool.write.queue_size: 4
+# thread_pool.search.queue_size: 4
+# thread_pool.listener.queue_size: 8
+# thread_pool.analyze.queue_size: 8
+# thread_pool.vectortile.queue_size: 4
+
+
+# threadpool.index.type: fixed
+# threadpool.index.size: 64
+# threadpool.index.queue_size: 1000
+# indices.memory.index_buffer_size: 20%
+
+# threadpool.search.size: 64
+# threadpool.search.type: fixed
+# threadpool.search.queue_size: 1000
+# threadpool.get.type: fixed
+# threadpool.get.size: 32
+# threadpool.get.queue_size: 1000
+# threadpool.bulk.size: 32
+# threadpool.bulk.queue_size: 1000
+# threadpool.flush.type: fixed
+# threadpool.flush.size: 32
+# threadpool.flush.queue_size: 1000
+
+# indices.store.throttle.max_bytes_per_sec: 100MB
+
+
+# index.analysis.analyzer.ik.type: "ik"
+# index.merge.scheduler.max_thread_count: 8
+# index.translog.flush_threshold_size: 200MB
+# index.translog.durability: async
+# index.translog.flush_threshold_ops: 500000
+
 node.max_local_storage_nodes: 2
 # discovery.zen.ping.unicast.hosts: ["192.168.0.100"]
 # discovery.zen.minimum_master_nodes: 1
