@@ -1,8 +1,9 @@
 
 # How run
 ```bash
-docker run --ulimit nofile=65536:65536 -p 9200:9200 -p 9300:9300 -d --name es -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v $PWD/logs:/usr/share/elasticsearch/logs -v $PWD/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v $PWD/conf/analysis-ik:/usr/share/elasticsearch/config/analysis-ik -v $PWD/data:/usr/share/elasticsearch/data -v $PWD/plugins:/usr/share/elasticsearch/plugins  elasticsearch:7.16.2
+docker run --restart=always --ulimit nofile=65536:65536 -p 9200:9200 -p 9300:9300 -d --name es -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v $PWD/logs:/usr/share/elasticsearch/logs -v $PWD/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v $PWD/conf/analysis-ik:/usr/share/elasticsearch/config/analysis-ik -v $PWD/data:/usr/share/elasticsearch/data -v $PWD/plugins:/usr/share/elasticsearch/plugins  elasticsearch:7.16.2
 
+# docker update --restart  always es
 
 docker run -p 9200:9200 -p 9300:9300 -d --name es -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -v $PWD/conf:/usr/share/elasticsearch/config -v `pwd`/logs:/usr/share/elasticsearch/logs -v $PWD/data:/usr/share/elasticsearch/data -v $PWD/plugins:/usr/share/elasticsearch/plugins  elasticsearch:7.16.2
 
@@ -28,7 +29,9 @@ elasticdump --input=./bak.json --output=http://127.0.0.1:9200 --type=cve_index
 git clone https://github.com/medcl/esm
 cd esm
 make build
-esm  -s http://192.168.0.100:9200  -d http://127.0.0.1:9200 -x ip2domain_index  -y ip2domain_index -w=5 -b=10 -c 10000
+esm  -s http://127.0.0.1:9200  -d http://192.168.0.112:9200 -x cve_index  -y cve_index -w=5 -b=10 -c 10000
+
+esm  -s http://192.168.0.100:9200  -d http://192.168.0.112:9200 -x ip2domain_index  -y ip2domain_index -w=5 -b=10 -c 10000
 
 ```
 
