@@ -10,9 +10,12 @@ network.host: 0.0.0.0
 #端口
 http.port: 9200
 #设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的，目前是单机，放入一个节点即可
-discovery.seed_hosts: ["127.0.0.1:9300", "192.168.0.100:9300", "192.168.0.107:9300"]
-cluster.initial_master_nodes: ["node-1"]
+discovery.seed_hosts: [ "192.168.0.112:9300"]
+cluster.initial_master_nodes: [ "node-3"]
 cluster.routing.allocation.same_shard.host: true
+node.master: false
+node.ingest: false
+node.data: true
 
 # cluster.routing.allocation.node_initial_primaries_recoveries: 8
 # cluster.routing.allocation.node_concurrent_recoveries: 2
@@ -83,4 +86,16 @@ transport.tcp.port: 9300
 transport.tcp.compress: true
 # 设置是否压缩tcp传输时的数据，默认为false，不压缩。
 
-reindex.remote.whitelist: "192.168.0.100:9300"
+# reindex.remote.whitelist: "192.168.0.100:9300"
+
+# https://docs.zammad.org/en/latest/install/elasticsearch.html#step-2-suggested-configuration
+# Performance may suffer if it is set too high.
+http.max_content_length: 400mb
+
+# Allows the engine to generate larger (more complex) search queries.
+# Elasticsearch will raise an error or deprecation notice if this value is too low,
+# but setting it too high can overload system resources (Default: 1024).
+#
+# Available in version 6.6+ only.
+indices.query.bool.max_clause_count: 20000
+# indexing_pressure.memory.limit: 30
