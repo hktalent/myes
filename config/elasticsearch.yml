@@ -14,7 +14,7 @@ http.port: 9200
 discovery.seed_hosts: [ "192.168.0.112:9300","192.168.0.107:9301","192.168.0.107:9302", "192.168.0.107:9300"]
 cluster.initial_master_nodes: [ "192.168.0.112:9300"]
 cluster.routing.allocation.same_shard.host: true
-# node.master: false
+# node.master: true
 # node.ingest: true
 # node.data: true
 
@@ -62,7 +62,7 @@ cluster.routing.allocation.same_shard.host: true
 # index.translog.durability: async
 # index.translog.flush_threshold_ops: 500000
 
-node.max_local_storage_nodes: 2
+# node.max_local_storage_nodes: 2
 # discovery.zen.ping.unicast.hosts: ["192.168.0.100"]
 # discovery.zen.minimum_master_nodes: 1
 # discovery.zen.ping.multicast.enabled: false
@@ -91,7 +91,7 @@ transport.tcp.compress: true
 
 # https://docs.zammad.org/en/latest/install/elasticsearch.html#step-2-suggested-configuration
 # Performance may suffer if it is set too high.
-http.max_content_length: 800mb
+http.max_content_length: 400mb
 
 # Allows the engine to generate larger (more complex) search queries.
 # Elasticsearch will raise an error or deprecation notice if this value is too low,
