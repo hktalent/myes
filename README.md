@@ -1,14 +1,14 @@
 
 # How run
 ```bash
+docker run --restart=always --ulimit nofile=65536:65536 -p 9200:9200 -p 9300:9300 -d --name es -v $PWD/logs:/usr/share/elasticsearch/logs -v $PWD/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v $PWD/config/jvm.options:/usr/share/elasticsearch/config/jvm.options  -v $PWD/data:/usr/share/elasticsearch/data  hktalent/elasticsearch:7.16.2
+
+docker run --restart=always --ulimit nofile=65536:65536 -p 9200:9200 -p 9300:9300 -d --name es -v $PWD/logs:/usr/share/elasticsearch/logs -v $PWD/config:/usr/share/elasticsearch/config -v $PWD/data:/usr/share/elasticsearch/data -v $PWD/plugins:/usr/share/elasticsearch/plugins  elasticsearch:7.16.2
+
+
 docker run --restart=always --ulimit nofile=65536:65536 -p 9200:9200 -p 9300:9300 -d --name es -e ES_JAVA_OPTS="-Xms8g -Xmx8g" -v $PWD/logs:/usr/share/elasticsearch/logs -v $PWD/config:/usr/share/elasticsearch/config -v $PWD/data:/usr/share/elasticsearch/data -v $PWD/plugins:/usr/share/elasticsearch/plugins  elasticsearch:7.16.2
 
-
 docker run --restart=always --ulimit nofile=65536:65536 -p 9200:9200 -p 9300:9300 -d --name es -e ES_JAVA_OPTS="-Xms8g -Xmx8g" -v $PWD/logs:/usr/share/elasticsearch/logs -v $PWD/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v $PWD/conf/jvm.options:/usr/share/elasticsearch/config/jvm.options  -v $PWD/data:/usr/share/elasticsearch/data  elasticsearch:7.16.2
-
-
-docker run --restart=always --ulimit nofile=65536:65536 -p 9200:9200 -p 9300:9300 -d --name es -v $PWD/logs:/usr/share/elasticsearch/logs -v $PWD/conf/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v $PWD/conf/jvm.options:/usr/share/elasticsearch/config/jvm.options  -v $PWD/data:/usr/share/elasticsearch/data  elasticsearch:7.16.2
-
 
 # docker update --restart  always es
 
@@ -19,6 +19,11 @@ https://github.com/elasticsearch-dump/elasticsearch-dump
 ```bash
 
 rm -rf plugins/*
+./bin/elasticsearch-plugin remove --purge analysis-ik
+./bin/elasticsearch-plugin remove --purge discovery-azure-classic
+./bin/elasticsearch-plugin remove --purge ingest-attachment
+./bin/elasticsearch-plugin remove --purge discovery-ec2
+
 ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.16.2/elasticsearch-analysis-ik-7.16.2.zip
 ./bin/elasticsearch-plugin install ingest-attachment
 ./bin/elasticsearch-plugin install analysis-icu
