@@ -12,12 +12,12 @@ transport.host: 0.0.0.0
 http.port: 9202
 transport.tcp.port: 9302
 # 设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的，目前是单机，放入一个节点即可
-discovery.seed_hosts: [ "192.168.0.112:9300","127.0.0.1:9300","127.0.0.1:9301" ]
+discovery.seed_hosts: [ "192.168.0.112:9300","192.168.0.107:9301","192.168.0.107:9302", "192.168.0.107:9300"]
 cluster.initial_master_nodes: [ "192.168.0.112:9300" ]
 cluster.routing.allocation.same_shard.host: true
-node.master: false
-node.ingest: true
-node.data: false
+# node.master: false
+# node.ingest: true
+# node.data: true
 
 # cluster.routing.allocation.node_initial_primaries_recoveries: 8
 # cluster.routing.allocation.node_concurrent_recoveries: 2
