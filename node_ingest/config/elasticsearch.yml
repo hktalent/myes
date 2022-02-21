@@ -1,7 +1,7 @@
 #集群名称
 cluster.name: my-application
 #节点名称
-node.name: node-1
+node.name: ingest-1
 #数据和日志的存储目录
 path.data: /usr/share/elasticsearch/data
 path.logs: /usr/share/elasticsearch/logs
@@ -9,14 +9,15 @@ path.logs: /usr/share/elasticsearch/logs
 network.host: 0.0.0.0
 transport.host: 0.0.0.0
 #端口
-http.port: 9200
+http.port: 9202
+transport.tcp.port: 9302
 # 设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的，目前是单机，放入一个节点即可
-discovery.seed_hosts: [ "192.168.0.112:9300","127.0.0.1:9301" ]
-cluster.initial_master_nodes: [ "192.168.0.112:9300"]
+discovery.seed_hosts: [ "192.168.0.112:9300","127.0.0.1:9300","127.0.0.1:9301" ]
+cluster.initial_master_nodes: [ "192.168.0.112:9300" ]
 cluster.routing.allocation.same_shard.host: true
 node.master: false
 node.ingest: true
-node.data: true
+node.data: false
 
 # cluster.routing.allocation.node_initial_primaries_recoveries: 8
 # cluster.routing.allocation.node_concurrent_recoveries: 2
@@ -81,8 +82,6 @@ http.cors.allow-origin: "*"
 http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
 http.cors.allow-headers : Authorization, X-Requested-With,X-Auth-Token,Content-Type, Content-Length
 
-
-transport.tcp.port: 9300
 # 设置节点之间交互的tcp端口，默认是9300。
 transport.tcp.compress: true
 # 设置是否压缩tcp传输时的数据，默认为false，不压缩。
