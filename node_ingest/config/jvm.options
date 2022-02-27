@@ -17,5 +17,5 @@
 8:-XX:GCLogFileSize=64m
 9-:-Xlog:gc*,gc+age=trace,safepoint:file=logs/gc.log:utctime,pid,tags:filecount=32,filesize=64m
 
--Xms8g
--Xmx8g
+-Xms4g
+-Xmx4g

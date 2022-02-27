@@ -9,12 +9,12 @@ path.logs: /usr/share/elasticsearch/logs
 network.host: 0.0.0.0
 transport.host: 0.0.0.0
 #端口
-transport.tcp.port: 9301
-http.port: 9201
+transport.tcp.port: 9300
+http.port: 9200
 # 设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的，目前是单机，放入一个节点即可
 discovery.seed_hosts: [ "192.168.0.112:9300","192.168.0.107:9301","192.168.0.107:9302", "192.168.0.107:9300"]
 # cluster.initial_master_nodes: [ "node-3"]
-cluster.initial_master_nodes: [ "192.168.0.112:9300" ]
+cluster.initial_master_nodes: [ "192.168.0.112:9300","192.168.0.107:9301","192.168.0.107:9302", "192.168.0.107:9300"]
 cluster.routing.allocation.same_shard.host: true
 # node.master: false
 # node.ingest: true
@@ -86,7 +86,7 @@ http.cors.allow-headers : Authorization, X-Requested-With,X-Auth-Token,Content-T
 
 
 # 设置节点之间交互的tcp端口，默认是9300。
-transport.tcp.compress: true
+# transport.tcp.compress: true
 # 设置是否压缩tcp传输时的数据，默认为false，不压缩。
 
 # reindex.remote.whitelist: "192.168.0.100:9300"
