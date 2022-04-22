@@ -9,14 +9,43 @@ path.logs: /usr/share/elasticsearch/logs
 network.host: 0.0.0.0
 transport.host: 0.0.0.0
 #端口
-transport.tcp.port: 9300
 http.port: 9200
+transport.tcp.port: 9300
 # 设置在集群中的所有节点名称，这个节点名称就是之前所修改的，当然你也可以采用默认的，目前是单机，放入一个节点即可
 discovery.seed_hosts: [ "192.168.0.112:9300","192.168.0.107:9301","192.168.0.107:9302", "192.168.0.107:9300"]
-# cluster.initial_master_nodes: [ "node-3"]
 cluster.initial_master_nodes: [ "192.168.0.112:9300","192.168.0.107:9301","192.168.0.107:9302", "192.168.0.107:9300"]
 cluster.routing.allocation.same_shard.host: true
-# node.master: false
+client.transport.ping_timeout: 60s
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
+http.cors.allow-headers : Authorization, X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+
+
+# 设置节点之间交互的tcp端口，默认是9300。
+# transport.tcp.compress: true
+# 设置是否压缩tcp传输时的数据，默认为false，不压缩。
+
+# reindex.remote.whitelist: "192.168.0.100:9300"
+
+# https://docs.zammad.org/en/latest/install/elasticsearch.html#step-2-suggested-configuration
+# Performance may suffer if it is set too high.
+http.max_content_length: 400mb
+
+# Allows the engine to generate larger (more complex) search queries.
+# Elasticsearch will raise an error or deprecation notice if this value is too low,
+# but setting it too high can overload system resources (Default: 1024).
+#
+# Available in version 6.6+ only.
+indices.query.bool.max_clause_count: 20000
+# indexing_pressure.memory.limit: 30
+cluster.routing.allocation.disk.threshold_enabled: false
+# 开启就无法启动
+# bootstrap.memory_lock: true
+
+# 设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）
+# node.master: true
 # node.ingest: true
 # node.data: true
 
@@ -64,10 +93,9 @@ cluster.routing.allocation.same_shard.host: true
 # index.translog.durability: async
 # index.translog.flush_threshold_ops: 500000
 
-node.max_local_storage_nodes: 2
+# node.max_local_storage_nodes: 2
 # discovery.zen.ping.unicast.hosts: ["192.168.0.100"]
 # discovery.zen.minimum_master_nodes: 1
-# discovery.zen.ping.multicast.enabled: false
 # discovery.zen.ping.multicast.group: 224.2.2.4
 # discovery.zen.ping.multicast.port : 54328
 # discovery.zen.ping.multicast.ttl: 3
@@ -78,27 +106,3 @@ node.max_local_storage_nodes: 2
 # index.number_of_replicas: 2
 #indices.fielddata.cache.size: 50%
 #
-http.cors.enabled: true
-http.cors.allow-origin: "*"
-http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
-http.cors.allow-headers : Authorization, X-Requested-With,X-Auth-Token,Content-Type, Content-Length
-
-
-
-# 设置节点之间交互的tcp端口，默认是9300。
-# transport.tcp.compress: true
-# 设置是否压缩tcp传输时的数据，默认为false，不压缩。
-
-# reindex.remote.whitelist: "192.168.0.100:9300"
-
-# https://docs.zammad.org/en/latest/install/elasticsearch.html#step-2-suggested-configuration
-# Performance may suffer if it is set too high.
-http.max_content_length: 800mb
-
-# Allows the engine to generate larger (more complex) search queries.
-# Elasticsearch will raise an error or deprecation notice if this value is too low,
-# but setting it too high can overload system resources (Default: 1024).
-#
-# Available in version 6.6+ only.
-indices.query.bool.max_clause_count: 20000
-# indexing_pressure.memory.limit: 30
